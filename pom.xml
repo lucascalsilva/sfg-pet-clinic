@@ -17,7 +17,7 @@
     <artifactId>sfg-pet-clinic</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <name>sfg-pet-clinic</name>
-    <description>SFG Pet Clini c Project</description>
+    <description>SFG Pet Clinic Project</description>
 
     <properties>
         <java.version>1.8</java.version>
