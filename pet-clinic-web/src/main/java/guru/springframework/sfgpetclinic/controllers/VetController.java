@@ -8,6 +8,6 @@ public class VetController {
 
     @RequestMapping({"/vets", "/vets/index.html", "/vets/index"})
     public String listVets(){
-        return "vets/index_vets.html";
+        return "vets/index_vets";
     }
 }
