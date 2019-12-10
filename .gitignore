@@ -67,8 +67,8 @@ local.properties
 ######################
 # Maven
 ######################
-/log/
-/target/
+log/
+target/
 pom.xml.releaseBackup
 release.properties
 
@@ -76,7 +76,7 @@ release.properties
 # Gradle
 ######################
 .gradle/
-/build/
+build/
 
 ######################
 # Package Files
