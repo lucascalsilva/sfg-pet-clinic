@@ -1,0 +1,14 @@
+{
+  "typeClass": "vet",
+  "serviceBean": "vetService",
+  "data": [
+    {
+      "firstName": "Sam",
+      "lastName": "Axe"
+    },
+    {
+      "firstName": "Jessie",
+      "lastName": "Porter"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "typeClass": "Pet",
+  "serviceBean": "petService",
+  "data": []
+}

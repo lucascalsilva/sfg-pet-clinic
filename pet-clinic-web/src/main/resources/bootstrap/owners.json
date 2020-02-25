@@ -1,0 +1,13 @@
+{
+  "typeClass": "owner",
+  "serviceBean": "ownerService",
+  "data": [
+  {
+    "firstName": "Fiona",
+    "lastName": "Glennane"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Weston"
+  }
+]}

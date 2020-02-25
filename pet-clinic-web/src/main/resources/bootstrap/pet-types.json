@@ -1,0 +1,9 @@
+
+{
+  "typeClass": "petType",
+  "serviceBean": "petTypeService",
+  "data": [
+    {"name": "dog"},
+    {"name":"cat"}
+  ]
+}
