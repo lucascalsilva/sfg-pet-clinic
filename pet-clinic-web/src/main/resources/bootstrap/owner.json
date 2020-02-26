@@ -1,0 +1,34 @@
+[
+  {
+    "firstName": "Fiona",
+    "lastName": "Glennane",
+    "address": "Borges de Medeiros 50",
+    "city": "Porto Alegre",
+    "telephone": "51999959992",
+    "pets": [
+      {
+        "name": "CATIORO",
+        "birthDate": "2019-02-02",
+        "petType": {
+          "name": "dog"
+        }
+      }
+    ]
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Weston",
+    "address": "Julio de Castilhos 33",
+    "city": "Porto Alegre",
+    "telephone": "51999959993",
+    "pets": [
+      {
+        "name": "GARURINHO",
+        "birthDate": "2019-02-02",
+        "petType": {
+          "name": "gato"
+        }
+      }
+    ]
+  }
+]

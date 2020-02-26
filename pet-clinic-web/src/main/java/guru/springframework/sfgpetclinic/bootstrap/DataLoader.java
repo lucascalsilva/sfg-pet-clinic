@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.util.StringUtils;
 
@@ -23,13 +24,17 @@ import java.net.URL;
 import java.util.*;
 
 @Component
+@Profile("bootstrap-data")
 public class DataLoader implements CommandLineRunner, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
-    private final String baseModelPackage = "guru.springframework.sfgpetclinic.model";
-    private final String boostrapResourceFolder = "bootstrap";
+    private final DataLoaderConfig dataLoaderConfig;
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    
+
+    public DataLoader(DataLoaderConfig dataLoaderConfig) {
+        this.dataLoaderConfig = dataLoaderConfig;
+    }
+
     @Override
     public void run(String... args) throws Exception {
         logger.info("Running data loader...");
@@ -37,7 +42,7 @@ public class DataLoader implements CommandLineRunner, ApplicationContextAware {
     }
 
     private void bootstrapData() {
-        URL bootstrapFolderUrl = Thread.currentThread().getContextClassLoader().getResource(boostrapResourceFolder);
+        URL bootstrapFolderUrl = Thread.currentThread().getContextClassLoader().getResource(dataLoaderConfig.getBootstrapFilesFolder());
         if (bootstrapFolderUrl != null) {
             Optional<File[]> files = Optional.ofNullable(new File(bootstrapFolderUrl.getPath()).listFiles());
             files.ifPresent(files_ -> {
@@ -50,23 +55,23 @@ public class DataLoader implements CommandLineRunner, ApplicationContextAware {
 
     private void loadDataFile(File file) {
         try {
-            ObjectNode rawJson = new ObjectMapper().readValue(file, ObjectNode.class);
-            if (rawJson.has("typeClass") && rawJson.has("serviceBean") && rawJson.has("data")) {
-                String typeClass = rawJson.get("typeClass").textValue();
-                String serviceBean = rawJson.get("serviceBean").textValue();
+            String typeClassName = StringUtils.capitalize(file.getName()).replace(".json", "");
+            String serviceInterfaceName = typeClassName + "Service";
 
-                Class typeClass_ = Class.forName(baseModelPackage + "." + StringUtils.capitalize(typeClass));
-                Class arrayClass = Array.newInstance(typeClass_, 0).getClass();
-                Optional<Object[]> data = Optional.of((Object[]) new ObjectMapper().readValue(rawJson.get("data").toString(), arrayClass));
-                CrudService crudService = (CrudService) applicationContext.getBean(serviceBean);
+            Class typeClass = Class.forName(dataLoaderConfig.getBaseModelPackage() + "." + typeClassName);
+            Class arrayClass = Array.newInstance(typeClass, 0).getClass();
+            Class serviceInterface = Class.forName(dataLoaderConfig.getBaseServicePackage() + "." + serviceInterfaceName);
+            Optional<Object[]> data = Optional.of((Object[]) new ObjectMapper().readValue(file, arrayClass));
+            CrudService crudService = (CrudService) applicationContext.getBean(serviceInterface);
 
-                data.ifPresent(objects -> {
-                    Arrays.stream(objects).forEach(crudService::save);
+            data.ifPresent(objects -> {
+                Arrays.stream(objects).forEach(object -> {
+                        crudService.save(object);
+                        logger.debug("Loaded record into {} ", file.getName());
+                        logger.debug("Record {} ", object.toString());
                 });
-                logger.info("Loaded file {} ", file.getName());
-            } else {
-                logger.warn("File {} does not have either typeClass, serviceBean or data.", file.getName());
-            }
+            });
+            logger.info("Loaded file {} ", file.getName());
         } catch (IOException | ClassNotFoundException e) {
             logger.error("Issue on loading data for file {}", file.getName());
             logger.error("Exception: ", e);

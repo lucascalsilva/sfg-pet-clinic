@@ -1,0 +1,26 @@
+[
+  {
+    "firstName": "Sam",
+    "lastName": "Axe",
+    "specialities": [
+      {
+        "name": "Animal Welfare"
+      },
+      {
+        "name": "Behavior"
+      }
+    ]
+  },
+  {
+    "firstName": "Jessie",
+    "lastName": "Porter",
+    "specialities": [
+      {
+        "name": "Dentistry"
+      },
+      {
+        "name": "Emergency and Critical Care"
+      }
+    ]
+  }
+]

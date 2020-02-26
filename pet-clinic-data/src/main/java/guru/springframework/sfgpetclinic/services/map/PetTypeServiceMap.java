@@ -4,6 +4,7 @@ import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.services.PetTypeService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service("petTypeService")
@@ -26,11 +27,23 @@ public class PetTypeServiceMap extends AbstractMapService<PetType, Long> impleme
 
     @Override
     public PetType save(PetType object) {
-        return super.save(object);
+        PetType savedPetType = findByName(object.getName());
+        if(savedPetType == null) {
+            return super.save(object);
+        }
+        else {
+            return savedPetType;
+        }
     }
 
     @Override
     public PetType findById(Long id) {
         return super.findById(id);
+    }
+
+    public PetType findByName(String name){
+        return super.map.values().stream()
+                .filter(petType_ -> petType_.getName()
+                        .equals(name)).findFirst().orElse(null);
     }
 }
