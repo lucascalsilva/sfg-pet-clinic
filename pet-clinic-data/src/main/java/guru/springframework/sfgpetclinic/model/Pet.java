@@ -6,16 +6,27 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "pets")
 public class Pet extends NamedEntity {
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
+    @Column(name = "birth_date")
     private LocalDate birthDate;
+    @ManyToOne
+    @JoinColumn(name = "pet_type_id")
     private PetType petType;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    public Pet() {
+    }
 
     public LocalDate getBirthDate() {
         return birthDate;
