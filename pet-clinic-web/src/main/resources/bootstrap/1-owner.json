@@ -8,10 +8,7 @@
     "pets": [
       {
         "name": "CATIORO",
-        "birthDate": "2019-02-02",
-        "petType": {
-          "name": "dog"
-        }
+        "birthDate": "2019-02-02"
       }
     ]
   },
@@ -24,10 +21,7 @@
     "pets": [
       {
         "name": "GARURINHO",
-        "birthDate": "2019-02-02",
-        "petType": {
-          "name": "gato"
-        }
+        "birthDate": "2019-02-02"
       }
     ]
   }
