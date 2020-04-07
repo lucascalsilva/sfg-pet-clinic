@@ -1,11 +1,22 @@
 package guru.springframework.sfgpetclinic.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @MappedSuperclass
+@Getter
+@Setter
+@NoArgsConstructor
+@SuperBuilder
 public class BaseEntity implements Serializable {
 
     @Id
@@ -16,17 +27,6 @@ public class BaseEntity implements Serializable {
 
     private LocalDateTime lastUpdateDate;
 
-    public BaseEntity() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @PrePersist
     public void setCreationDate(){
         this.creationDate = LocalDateTime.now();
@@ -35,5 +35,20 @@ public class BaseEntity implements Serializable {
     @PreUpdate
     public void setLastUpdateDate(){
         this.lastUpdateDate = LocalDateTime.now();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BaseEntity that = (BaseEntity) o;
+
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 13;
     }
 }

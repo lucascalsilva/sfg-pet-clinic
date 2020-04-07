@@ -19,6 +19,13 @@
     <name>sfg-pet-clinic</name>
     <description>SFG Pet Clinic Project</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>

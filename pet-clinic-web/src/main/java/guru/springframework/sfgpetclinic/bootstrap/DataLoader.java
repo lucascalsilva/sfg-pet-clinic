@@ -2,6 +2,8 @@ package guru.springframework.sfgpetclinic.bootstrap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.sfgpetclinic.services.CrudService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -20,17 +22,13 @@ import java.util.*;
 
 @Component
 @Profile("bootstrap-data")
+@RequiredArgsConstructor
+@Slf4j
 public class DataLoader implements CommandLineRunner, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
     private final DataLoaderConfig dataLoaderConfig;
-    private final Logger log = LoggerFactory.getLogger(getClass());
     private final ObjectMapper mapper;
-
-    public DataLoader(DataLoaderConfig dataLoaderConfig, ObjectMapper mapper) {
-        this.dataLoaderConfig = dataLoaderConfig;
-        this.mapper = mapper;
-    }
 
     @Override
     public void run(String... args) throws Exception {

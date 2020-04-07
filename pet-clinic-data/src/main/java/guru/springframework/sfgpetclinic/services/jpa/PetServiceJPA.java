@@ -3,6 +3,7 @@ package guru.springframework.sfgpetclinic.services.jpa;
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.repositories.PetRepository;
 import guru.springframework.sfgpetclinic.services.PetService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,10 @@ import java.util.Set;
 
 @Service
 @Profile("jpa")
+@RequiredArgsConstructor
 public class PetServiceJPA implements PetService {
 
     private final PetRepository petRepository;
-
-    public PetServiceJPA(PetRepository petRepository) {
-        this.petRepository = petRepository;
-    }
 
     @Override
     public Set<Pet> findAll() {
