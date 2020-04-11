@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Profile({"map", "default"})
@@ -42,8 +44,10 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
                 } else {
                     throw new RuntimeException("Pet type is required");
                 }
-                if (pet.getId() == null)
+                if (pet.getId() == null) {
                     pet.setId(petService.save(pet).getId());
+                    pet.setOwner(object);
+                }
             });
             return super.save(object);
         } else {
@@ -53,7 +57,9 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
 
     @Override
     public Set<Owner> findByLastName(String lastName) {
-        return null;
+        return findAll().stream()
+                .filter(owner -> owner.getLastName().contains(lastName))
+                .collect(Collectors.toSet());
     }
 
     @Override
