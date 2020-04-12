@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static guru.springframework.sfgpetclinic.util.ApplicationConstants.*;
+
 @Controller
 @RequestMapping({"", "/", "index", "index.html"})
 @RequiredArgsConstructor
@@ -11,11 +13,11 @@ public class IndexController {
 
     @RequestMapping
     public String index(){
-        return "index";
+        return INDEX_PAGE;
     }
 
-    @RequestMapping("/oups")
+    @RequestMapping(OOUPS_MAPPING)
     public String oupsHandler(){
-        return "notimplemented";
+        return NOT_IMPLEMENTED_PAGE;
     }
 }

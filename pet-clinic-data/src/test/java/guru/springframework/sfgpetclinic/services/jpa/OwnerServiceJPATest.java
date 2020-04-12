@@ -21,10 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -52,6 +49,7 @@ class OwnerServiceJPATest {
     private final String PET_NAME = "Garurinho";
     private final String PET_TYPE_NAME = "Cat";
     private Owner owner;
+    private List<Owner> owners;
 
     @BeforeEach
     void setup(){
@@ -61,12 +59,15 @@ class OwnerServiceJPATest {
         pets.add(pet);
 
         owner = Owner.builder().id(OWNER_ID).lastName(LAST_NAME).pets(pets).build();
+
+        owners = new ArrayList<>();
+        owners.add(owner);
     }
 
     @Test
     void findByLastName() {
         when(ownerRepository.findByLastNameLikeIgnoreCase(anyString()))
-                .thenReturn(Arrays.asList(owner));
+                .thenReturn(owners);
 
         assertThat(ownerServiceJPA.findByLastName(LAST_NAME)).contains(owner);
         verify(ownerRepository, times(1)).findByLastNameLikeIgnoreCase(eq(LAST_NAME));
@@ -95,7 +96,6 @@ class OwnerServiceJPATest {
 
     @Test
     void findAll() {
-        Set<Owner> owners = new HashSet<>();
         owners.add(owner);
         when(ownerRepository.findAll()).thenReturn(owners);
 

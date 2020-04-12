@@ -46,7 +46,6 @@ class OwnerServiceJPAIT {
     @Autowired
     private PetRepository petRepository;
 
-    private final Long ID = 1L;
     private final String LAST_NAME = "Smith";
     private Long ownerId;
     private Owner owner;
