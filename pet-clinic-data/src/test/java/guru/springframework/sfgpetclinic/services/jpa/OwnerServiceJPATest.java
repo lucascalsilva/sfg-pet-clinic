@@ -6,25 +6,16 @@ import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.repositories.OwnerRepository;
 import guru.springframework.sfgpetclinic.repositories.PetRepository;
 import guru.springframework.sfgpetclinic.repositories.PetTypeRepository;
-import guru.springframework.sfgpetclinic.services.map.OwnerServiceMap;
-import guru.springframework.sfgpetclinic.services.map.PetServiceMap;
-import guru.springframework.sfgpetclinic.services.map.PetTypeServiceMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -66,11 +57,11 @@ class OwnerServiceJPATest {
 
     @Test
     void findByLastName() {
-        when(ownerRepository.findByLastNameLikeIgnoreCase(anyString()))
+        when(ownerRepository.findByLastNameContainingIgnoreCase(anyString()))
                 .thenReturn(owners);
 
         assertThat(ownerServiceJPA.findByLastName(LAST_NAME)).contains(owner);
-        verify(ownerRepository, times(1)).findByLastNameLikeIgnoreCase(eq(LAST_NAME));
+        verify(ownerRepository, times(1)).findByLastNameContainingIgnoreCase(eq(LAST_NAME));
     }
 
     @Test
