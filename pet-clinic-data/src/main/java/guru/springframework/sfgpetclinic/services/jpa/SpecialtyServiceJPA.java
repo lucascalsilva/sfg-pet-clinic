@@ -1,5 +1,6 @@
 package guru.springframework.sfgpetclinic.services.jpa;
 
+import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.model.Specialty;
 import guru.springframework.sfgpetclinic.repositories.SpecialtyRepository;
 import guru.springframework.sfgpetclinic.services.SpecialtyService;
@@ -42,5 +43,10 @@ public class SpecialtyServiceJPA implements SpecialtyService {
     @Override
     public void deleteById(Long aLong) {
         specialtyRepository.deleteById(aLong);
+    }
+
+    @Override
+    public Specialty findByName(String name) {
+        return specialtyRepository.findByName(name).orElse(null);
     }
 }

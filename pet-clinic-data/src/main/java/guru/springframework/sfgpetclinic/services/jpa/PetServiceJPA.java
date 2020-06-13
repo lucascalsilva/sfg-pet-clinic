@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,5 +43,10 @@ public class PetServiceJPA implements PetService {
     @Override
     public void deleteById(Long aLong) {
         petRepository.deleteById(aLong);
+    }
+
+    @Override
+    public Pet findByNameAndBirthDate(String name, LocalDate birthDate) {
+        return petRepository.findByNameAndBirthDate(name, birthDate).orElse(null);
     }
 }

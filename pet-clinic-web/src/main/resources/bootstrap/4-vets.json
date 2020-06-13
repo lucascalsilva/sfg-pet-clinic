@@ -1,0 +1,20 @@
+[
+  {
+    "firstName": "Sam",
+    "lastName": "Axe",
+    "specialties": [
+      {
+        "name": "Dentist"
+      }
+    ]
+  },
+  {
+    "firstName": "Jessie",
+    "lastName": "Porter",
+    "specialties": [
+      {
+        "name": "Dentist"
+      }
+    ]
+  }
+]

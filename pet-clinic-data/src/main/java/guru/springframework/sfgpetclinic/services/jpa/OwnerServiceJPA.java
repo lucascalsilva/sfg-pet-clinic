@@ -1,6 +1,7 @@
 package guru.springframework.sfgpetclinic.services.jpa;
 
 import guru.springframework.sfgpetclinic.model.Owner;
+import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.repositories.OwnerRepository;
 import guru.springframework.sfgpetclinic.repositories.PetRepository;
 import guru.springframework.sfgpetclinic.repositories.PetTypeRepository;
@@ -33,6 +34,11 @@ public class OwnerServiceJPA implements OwnerService {
 
     @Override
     public Owner save(Owner owner) {
+
+        for(Pet pet : owner.getPets()){
+            pet.setOwner(owner);
+        }
+
         return ownerRepository.save(owner);
     }
 
