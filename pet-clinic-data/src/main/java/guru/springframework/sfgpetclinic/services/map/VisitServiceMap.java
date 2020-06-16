@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Profile({"map", "default"})
@@ -49,5 +51,10 @@ public class VisitServiceMap extends AbstractMapService<Visit, Long> implements 
     @Override
     public Visit findById(Long id) {
         return super.findById(id);
+    }
+
+    @Override
+    public Set<Visit> findByPetId(Long petId) {
+        return super.map.values().stream().filter(visit -> visit.getId().equals(petId)).collect(Collectors.toSet());
     }
 }

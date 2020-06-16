@@ -6,6 +6,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 
 @Entity
 @Table(name = "visits")
@@ -16,7 +18,7 @@ import java.time.LocalDate;
 public class Visit extends BaseEntity {
 
     @Column(name = "date")
-    @DateTimeFormat(pattern = "YYYY-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     @Column(name = "description")
     private String description;
