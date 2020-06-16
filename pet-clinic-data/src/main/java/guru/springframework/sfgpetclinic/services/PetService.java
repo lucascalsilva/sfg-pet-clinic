@@ -1,6 +1,7 @@
 package guru.springframework.sfgpetclinic.services;
 
 import guru.springframework.sfgpetclinic.model.Pet;
+import guru.springframework.sfgpetclinic.model.PetType;
 
 import java.time.LocalDate;
 import java.util.Set;

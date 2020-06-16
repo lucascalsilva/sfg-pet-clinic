@@ -25,7 +25,7 @@ public class Pet extends NamedEntity {
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     //@JsonDeserialize(using = LocalDateDeserializer.class)
     //@JsonSerialize(using = LocalDateSerializer.class)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_date")
     private LocalDate birthDate;
     @ManyToOne

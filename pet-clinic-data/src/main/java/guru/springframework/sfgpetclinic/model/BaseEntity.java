@@ -51,4 +51,8 @@ public class BaseEntity implements Serializable {
     public int hashCode() {
         return 13;
     }
+
+    public boolean isNew() {
+        return this.id == null;
+    }
 }

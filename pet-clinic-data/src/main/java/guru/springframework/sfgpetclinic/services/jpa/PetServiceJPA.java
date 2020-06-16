@@ -1,7 +1,9 @@
 package guru.springframework.sfgpetclinic.services.jpa;
 
 import guru.springframework.sfgpetclinic.model.Pet;
+import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.repositories.PetRepository;
+import guru.springframework.sfgpetclinic.repositories.PetTypeRepository;
 import guru.springframework.sfgpetclinic.services.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Profile;
@@ -17,6 +19,7 @@ import java.util.Set;
 public class PetServiceJPA implements PetService {
 
     private final PetRepository petRepository;
+    private final PetTypeRepository petTypeRepository;
 
     @Override
     public Set<Pet> findAll() {
@@ -49,4 +52,5 @@ public class PetServiceJPA implements PetService {
     public Pet findByNameAndBirthDate(String name, LocalDate birthDate) {
         return petRepository.findByNameAndBirthDate(name, birthDate).orElse(null);
     }
+
 }
