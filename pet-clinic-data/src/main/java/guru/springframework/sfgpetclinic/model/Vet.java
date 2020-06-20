@@ -20,4 +20,15 @@ public class Vet extends Person {
             joinColumns = @JoinColumn(name = "vet_id"),
             inverseJoinColumns = @JoinColumn(name = "specialty_id"))
     private Set<Specialty> specialties = new HashSet<Specialty>();
+
+    protected Set<Specialty> getSpecialtiesInternal() {
+        if (this.specialties == null) {
+            this.specialties = new HashSet<>();
+        }
+        return this.specialties;
+    }
+
+    public int getNrOfSpecialties() {
+        return getSpecialtiesInternal().size();
+    }
 }
