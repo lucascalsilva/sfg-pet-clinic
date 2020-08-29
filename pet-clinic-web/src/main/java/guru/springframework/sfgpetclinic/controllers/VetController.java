@@ -3,6 +3,7 @@ package guru.springframework.sfgpetclinic.controllers;
 import guru.springframework.sfgpetclinic.model.Vet;
 import guru.springframework.sfgpetclinic.services.VetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class VetController {
         return "vets/vets";
     }
 
-    @GetMapping("/api/vets")
+    @GetMapping(path = "/api/vets")
     public @ResponseBody Set<Vet> getVetsJson(){
         return vetService.findAll();
     }
